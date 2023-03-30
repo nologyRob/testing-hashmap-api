@@ -5,16 +5,37 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 
+@Entity
+@Table(name = "album")
 public class Album {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+
     private String genre;
+
     private double rating;
+
     private String cover;
+
+    @Column(name = "peak_chart_position")
     private int peakChartPosition;
+
+    @Column(name = "num_of_songs")
     private int numOfSongs;
+
+    @Column(name = "date_released")
     private LocalDate dateReleased;
 
-    public Album() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -73,7 +94,11 @@ public class Album {
         this.dateReleased = dateReleased;
     }
 
-    public Album(String name, String genre, double rating, String cover, int peakChartPosition, int numOfSongs, LocalDate dateReleased) {
+    public Album() {
+    }
+
+    public Album(Long id, String name, String genre, double rating, String cover, int peakChartPosition, int numOfSongs, LocalDate dateReleased) {
+        this.id = id;
         this.name = name;
         this.genre = genre;
         this.rating = rating;

@@ -1,23 +1,45 @@
 package com.testing.hashmaps;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "era_style")
 public class EraStyle {
-    private String image;
-    private ArrayList<String> description;
-    private ArrayList<String> keyPieces;
 
-    public EraStyle(String image, ArrayList<String> description, ArrayList<String> keyPieces) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String image;
+
+    @ElementCollection
+    @CollectionTable(name = "era_style_description")
+    @Column(name = "description")
+    private List<String> description;
+
+    @ElementCollection
+    @CollectionTable(name = "era_style_key_pieces")
+    @Column(name = "key_piece")
+    private List<String> keyPieces;
+
+    public EraStyle() {
+    }
+
+    public EraStyle(Long id, String image, List<String> description, List<String> keyPieces) {
+        this.id = id;
         this.image = image;
         this.description = description;
         this.keyPieces = keyPieces;
     }
 
-    public EraStyle() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getImage() {
@@ -32,7 +54,7 @@ public class EraStyle {
         return description;
     }
 
-    public void setDescription(ArrayList<String> description) {
+    public void setDescription(List<String> description) {
         this.description = description;
     }
 
@@ -40,7 +62,8 @@ public class EraStyle {
         return keyPieces;
     }
 
-    public void setKeyPieces(ArrayList<String> keyPieces) {
+    public void setKeyPieces(List<String> keyPieces) {
         this.keyPieces = keyPieces;
     }
+// constructors, getters and setters
 }
